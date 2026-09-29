@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        :root {
+            --dark-blue: #0b1f3a;
+            --blue: #123b68;
+            --light-blue: #eef4fa;
+            --text: #172033;
+            --muted: #718096;
+            --white: #ffffff;
+            --danger: #dc3545;
+            --border: #dfe6ee;
+        }
+        body {
+            min-height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                         Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #f4f7fb, #e9f0f7);
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            width: 100%;
+            max-width: 430px;
+        }
+        /* =========================
+           LOGIN
+        ========================= */
+        .login-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 35px 30px;
+            box-shadow: 0 15px 45px rgba(11, 31, 58, 0.12);
+        }
+        .logo {
+            width: 58px;
+            height: 58px;
+            margin: 0 auto 20px;
+            border-radius: 15px;
+            background: var(--dark-blue);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+        }
+        h1 {
+            text-align: center;
+            color: var(--dark-blue);
+            font-size: 26px;
+            margin-bottom: 8px;
+        }
+        .subtitle {
+            text-align: center;
+            color: var(--muted);
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 18px;
+        }
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text);
+        }
+        input {
+            width: 100%;
+            height: 50px;
+            padding: 0 15px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            font-size: 16px;
+            outline: none;
+            transition: 0.2s;
+            background: #fff;
+        }
+        input:focus {
+            border-color: var(--blue);
+            box-shadow: 0 0 0 3px rgba(18, 59, 104, 0.08);
+        }
+        .login-button,
+        .logout-button {
+            width: 100%;
+            height: 50px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+        .login-button {
+            background: var(--dark-blue);
+            color: white;
+            margin-top: 8px;
+        }
+        .login-button:hover {
+            background: var(--blue);
+        }
+        .error {
+            display: none;
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 9px;
+            background: #fff0f1;
+            color: var(--danger);
+            text-align: center;
+            font-size: 14px;
+        }
+        /* =========================
+           DASHBOARD
+        ========================= */
+        .dashboard {
+            display: none;
+            width: 100%;
+            max-width: 900px;
+        }
+        .dashboard-card {
+            background: white;
+            border-radius: 20px;
+            padding: 50px 35px;
+            box-shadow: 0 15px 45px rgba(11, 31, 58, 0.12);
+            text-align: center;
+        }
+        .welcome {
+            font-size: clamp(38px, 8vw, 64px);
+            color: var(--dark-blue);
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .admin-name {
+            color: var(--muted);
+            font-size: 18px;
+            margin-bottom: 35px;
+        }
+        .logout-button {
+            width: auto;
+            min-width: 130px;
+            padding: 0 25px;
+            background: var(--dark-blue);
+            color: white;
+        }
+        .logout-button:hover {
+            background: var(--blue);
+        }
+        /* =========================
+           MOBILE
+        ========================= */
+        @media (max-width: 480px) {
+            body {
+                padding: 15px;
+            }
+            .login-card {
+                padding: 30px 22px;
+                border-radius: 17px;
+            }
+            .dashboard-card {
+                padding: 40px 22px;
+                border-radius: 17px;
+            }
+            h1 {
+                font-size: 24px;
+            }
+            .welcome {
+                font-size: 42px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <!-- =========================
+             LOGIN PAGE
+        ========================= -->
+        <section id="loginPage" class="login-card">
+            <div class="logo">
+                HZ
+            </div>
+            <h1>Admin Login</h1>
+            <p class="subtitle">
+                Sign in to access your dashboard
+            </p>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input
+                        type="text"
+                        id="username"
+                        placeholder="Enter username"
+                        autocomplete="username"
+                        required
+                    >
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Enter password"
+                        autocomplete="current-password"
+                        required
+                    >
+                </div>
+                <button type="submit" class="login-button">
+                    Login
+                </button>
+                <div id="errorMessage" class="error">
+                    Invalid username or password.
+                </div>
+            </form>
+        </section>
+        <!-- =========================
+             DASHBOARD / HOME PAGE
+        ========================= -->
+        <section id="dashboard" class="dashboard">
+            <div class="dashboard-card">
+                <div class="welcome">
+                    Welcome 👋
+                </div>
+                <div class="admin-name">
+                    Welcome, Admin
+                </div>
+                <button id="logoutButton" class="logout-button">
+                    Logout
+                </button>
+            </div>
+        </section>
+    </main>
+    <script>
+        /*
+         * ==========================================
+         * DEMO LOGIN CONFIGURATION
+         * ==========================================
+         *
+         * Change these later when connecting
+         * the system to a real backend/API.
+         */
+        const DEMO_USERNAME = "admin";
+        const DEMO_PASSWORD = "admin123";
+        /*
+         * ==========================================
+         * ELEMENTS
+         * ==========================================
+         */
+        const loginPage = document.getElementById("loginPage");
+        const dashboard = document.getElementById("dashboard");
+        const loginForm = document.getElementById("loginForm");
+        const logoutButton = document.getElementById("logoutButton");
+        const usernameInput = document.getElementById("username");
+        const passwordInput = document.getElementById("password");
+        const errorMessage = document.getElementById("errorMessage");
+        /*
+         * ==========================================
+         * LOGIN
+         * ==========================================
+         */
+        loginForm.addEventListener("submit", function(event) {
+            event.preventDefault();
+            const username = usernameInput.value.trim();
+            const password = passwordInput.value;
+            if (
+                username === DEMO_USERNAME &&
+                password === DEMO_PASSWORD
+            ) {
+                // Hide login
+                loginPage.style.display = "none";
+                // Show dashboard
+                dashboard.style.display = "block";
+                // Clear error
+                errorMessage.style.display = "none";
+                // Clear password
+                passwordInput.value = "";
+            } else {
+                // Show error
+                errorMessage.style.display = "block";
+                // Keep username, clear password
+                passwordInput.value = "";
+                passwordInput.focus();
+            }
+        });
+        /*
+         * ==========================================
+         * LOGOUT
+         * ==========================================
+         */
+        logoutButton.addEventListener("click", function() {
+            // Hide dashboard
+            dashboard.style.display = "none";
+            // Show login
+            loginPage.style.display = "block";
+            // Clear fields
+            usernameInput.value = "";
+            passwordInput.value = "";
+            // Hide error
+            errorMessage.style.display = "none";
+            // Put cursor back on username
+            usernameInput.focus();
+        });
+    </script>
+</body>
+</html>
